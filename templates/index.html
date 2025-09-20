@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="mb-0">Upload Excel File for Division Processing</h3>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="/upload" enctype="multipart/form-data">
+                    <div class="drag-drop-area">
+                        <i class="fas fa-cloud-upload-alt fa-3x text-muted mb-3"></i>
+                        <h5>Select or Drop your Excel file here</h5>
+                        <input type="file" class="form-control mt-3" name="file" accept=".xlsx,.xls" required>
+                        <small class="text-muted">Supported formats: .xlsx, .xls (Max 16MB)</small>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Division Column Name (Optional)</label>
+                        <input type="text" class="form-control" name="division_col" placeholder="Leave empty for auto-detection">
+                        <small class="text-muted">If your division column is not named 'division', specify it here</small>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-lg w-100">
+                        Process File
+                    </button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="card mt-4">
+            <div class="card-body">
+                <h5>How it works:</h5>
+                <ol>
+                    <li>Upload your Excel file containing division data</li>
+                    <li>The tool will automatically detect divisions (case-insensitive)</li>
+                    <li>Creates separate Excel files for each division</li>
+                    <li>Downloads all files as a ZIP package</li>
+                </ol>
+                
+                <div class="alert alert-info">
+                    <strong>Examples:</strong> If you have divisions like "UP-1", "UP-2", "Assam", "GUJARAT", 
+                    you'll get separate files: UP-1_Div.xlsx, UP-2_Div.xlsx, Assam_Div.xlsx, Gujarat_Div.xlsx
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
